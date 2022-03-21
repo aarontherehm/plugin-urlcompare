@@ -43,7 +43,7 @@ class VoiceUrlTest extends TwilioClientCommand {
 }
 
 VoiceUrlTest.description =
-  "Tests configured Voice URLs for valid syntax";
+  "Tests configured Voice URLs for duplicate values";
 
 // Flags are not currently implemented in this plugin
   
