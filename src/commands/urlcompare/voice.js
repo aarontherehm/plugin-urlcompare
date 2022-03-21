@@ -43,13 +43,15 @@ class VoiceUrlTest extends TwilioClientCommand {
 }
 
 VoiceUrlTest.description =
-  "Tests configured Voice and SMS URL for valid syntax";
+  "Tests configured Voice URLs for valid syntax";
 
-VoiceUrlTest.flags = {
-  properties: flags.string({
-    default: "sid, phoneNumber, voiceUrl, voiceFallbackUrl",
-    description: "lists URLs",
-  }),
-};
+// Flags are not currently implemented in this plugin
+  
+// VoiceUrlTest.flags = {
+//   properties: flags.string({
+//     default: "sid, phoneNumber, voiceUrl, voiceFallbackUrl",
+//     description: "lists URLs",
+//   }),
+// };
 
 module.exports = VoiceUrlTest;
