@@ -3,7 +3,7 @@ const { flags } = require("@oclif/command");
 const { TwilioClientCommand } = require("@twilio/cli-core").baseCommands;
 const chalk = require("chalk");
 
-class VoiceUrlTest extends TwilioClientCommand {
+class SmsUrlTest extends TwilioClientCommand {
   async run() {
     await super.run();
     const fullData = await this.twilioClient.incomingPhoneNumbers.list();
@@ -42,14 +42,16 @@ class VoiceUrlTest extends TwilioClientCommand {
   }
 }
 
-VoiceUrlTest.description =
-  "Tests configured Voice and SMS URL for valid syntax";
+SmsUrlTest.description =
+  "Tests configured SMS URL for duplicate values";
 
-VoiceUrlTest.flags = {
-  properties: flags.string({
-    default: "sid, phoneNumber, voiceUrl, voiceFallbackUrl",
-    description: "lists URLs",
-  }),
-};
+// Flags are not currently implemented for this plugin
 
-module.exports = VoiceUrlTest;
+// SmsUrlTest.flags = {
+//   properties: flags.string({
+//     default: "sid, phoneNumber, voiceUrl, voiceFallbackUrl",
+//     description: "lists URLs",
+//   }),
+// };
+
+module.exports = SmsUrlTest;
