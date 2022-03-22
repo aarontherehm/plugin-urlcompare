@@ -11,18 +11,18 @@ class VoiceUrlTest extends TwilioClientCommand {
   }
   outputComparison(fullData, properties, options) {
     const dataArray = fullData.constructor === Array ? fullData : [fullData];
-
+    
     if (dataArray.length === 0) {
       this.logger.info("No results");
       return;
     }
-
+    
     const limitedData = properties
       ? this.getLimitedData(dataArray, properties)
       : null;
 
     process.stdout.write(chalk.bold(`\nURL Validation Results\n\n`));
-
+    
     //Loop through data and compare voiceUrl to voiceFallbackUrl
     limitedData.forEach((element) => {
         if (element.voiceUrl === element.voiceFallbackUrl) {
@@ -45,13 +45,13 @@ class VoiceUrlTest extends TwilioClientCommand {
 VoiceUrlTest.description =
   "Tests configured Voice URLs for duplicate values";
 
-// Flags are not currently implemented in this plugin
+
   
-// VoiceUrlTest.flags = {
-//   properties: flags.string({
-//     default: "sid, phoneNumber, voiceUrl, voiceFallbackUrl",
-//     description: "lists URLs",
-//   }),
-// };
+VoiceUrlTest.flags = {
+  properties: flags.string({
+    default: "sid, phoneNumber, voiceUrl, voiceFallbackUrl",
+    description: "lists URLs",
+  }),
+};
 
 module.exports = VoiceUrlTest;

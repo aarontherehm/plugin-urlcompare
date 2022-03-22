@@ -45,13 +45,13 @@ class SmsUrlTest extends TwilioClientCommand {
 SmsUrlTest.description =
   "Tests configured SMS URL for duplicate values";
 
-// Flags are not currently implemented for this plugin
 
-// SmsUrlTest.flags = {
-//   properties: flags.string({
-//     default: "sid, phoneNumber, voiceUrl, voiceFallbackUrl",
-//     description: "lists URLs",
-//   }),
-// };
+
+SmsUrlTest.flags = {
+  properties: flags.string({
+    default: "sid, phoneNumber, voiceUrl, voiceFallbackUrl",
+    description: "lists URLs",
+  }),
+};
 
 module.exports = SmsUrlTest;
