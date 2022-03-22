@@ -21,24 +21,33 @@ class SmsUrlTest extends TwilioClientCommand {
       ? this.getLimitedData(dataArray, properties)
       : null;
 
-    process.stdout.write(chalk.bold(`\nURL Validation Results\n\n`));
-
+    process.stdout.write(chalk.bold(`\nURL Comparison Results\n\n`));
+    const testResults = [];
     //Loop through data and compare smsUrl to smsFallbackUrl
     limitedData.forEach((element) => {
-        if (element.smsUrl === element.smsFallbackUrl) {
-            if (element.smsUrl == undefined) {
-                return;
-          }
-        process.stdout.write(chalk.bold(`URL Test Failed`));
+        
+      if ((element.smsUrl == undefined) || element.smsFallbackUrl == undefined) {
+        testResults.push(`SID: ${element.sid} for Phone Number ${element.phoneNumber} has an undefined SMS or SMS Fallback URL`);
+    }   else   if (element.smsUrl === element.smsFallbackUrl) {
+            
+        process.stdout.write(chalk.bold(`URL Tests Failed`));
         process.stdout.write(
           `\n\nSID: ${element.sid} for Phone Number ${element.phoneNumber} has the same URL configured for SMS and SMS Fallback\n\n`
         );
         process.stdout.write(
           `VoiceURL: ${element.smsUrl}\nVoiceFallbackURL: ${element.smsFallbackUrl}\n\n`
         );
-
-      }
-    });
+          
+        }
+      
+    }
+    );
+    process.stdout.write(chalk.bold(`URL Tests Passed\n\n`));
+    testResults.forEach((member) => {
+      process.stdout.write(`${ member }\n`);
+    })
+    //process.stdout.write(JSON.stringify(testResults, null, 2));
+    process.stdout.write(`\n\n`);
   }
 }
 

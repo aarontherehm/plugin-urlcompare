@@ -21,14 +21,14 @@ class VoiceUrlTest extends TwilioClientCommand {
       ? this.getLimitedData(dataArray, properties)
       : null;
 
-    process.stdout.write(chalk.bold(`\nURL Validation Results\n\n`));
-    
+    process.stdout.write(chalk.bold(`\nURL Comparison Results\n\n`));
+    const testResults = [];
     //Loop through data and compare voiceUrl to voiceFallbackUrl
     limitedData.forEach((element) => {
-        if (element.voiceUrl === element.voiceFallbackUrl) {
-            if (element.voiceUrl == undefined) {
-            return;
-            }
+      if ((element.voiceUrl == undefined) || element.voiceFallbackUrl == undefined) {
+        testResults.push(`SID: ${element.sid} for Phone Number ${element.phoneNumber} has an undefined Voice or Voice Fallback URL`);
+      } else if (element.voiceUrl === element.voiceFallbackUrl) {
+          
         process.stdout.write(chalk.bold(`URL Test Failed`));
         process.stdout.write(
           `\n\nSID: ${element.sid} for Phone Number ${element.phoneNumber} has the same URL configured for Voice and Voice Fallback\n\n`
@@ -39,6 +39,12 @@ class VoiceUrlTest extends TwilioClientCommand {
 
       }
     });
+    process.stdout.write(chalk.bold(`URL Tests Passed\n\n`));
+    testResults.forEach((member) => {
+      process.stdout.write(`${ member }\n`);
+    })
+    //process.stdout.write(JSON.stringify(testResults, null, 2));
+    process.stdout.write(`\n\n`);
   }
 }
 
