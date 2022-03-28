@@ -25,11 +25,18 @@ class VoiceUrlTest extends TwilioClientCommand {
     const testResults = [];
     //Loop through data and compare voiceUrl to voiceFallbackUrl
     limitedData.forEach((element) => {
+
       if ((element.voiceUrl == undefined) || element.voiceFallbackUrl == undefined) {
         testResults.push(`SID: ${element.sid} for Phone Number ${element.phoneNumber} has an undefined Voice or Voice Fallback URL`);
-      } else if (element.voiceUrl === element.voiceFallbackUrl) {
+      }
+      // This collects blank URLs
+      else if ((element.voiceUrl == '') || element.voiceFallbackUrl == '') {
+        testResults.push(`SID: ${element.sid} for Phone Number ${element.phoneNumber} has a blank Voice or Voice Fallback URL`);
+      }
+      // Tests for same URL and also for trailing slashes but same URL
+      else if ((element.voiceUrl === element.voiceFallbackUrl) || (element.voiceUrl === `${ element.voiceFallbackUrl }/`) || (`${element.voiceUrl}/` === element.voiceFallbackUrl)) {
           
-        process.stdout.write(chalk.bold(`URL Test Failed`));
+        process.stdout.write(chalk.bold(`URL Tests Failed`));
         process.stdout.write(
           `\n\nSID: ${element.sid} for Phone Number ${element.phoneNumber} has the same URL configured for Voice and Voice Fallback\n\n`
         );
@@ -38,11 +45,16 @@ class VoiceUrlTest extends TwilioClientCommand {
         );
 
       }
+      else {
+        testResults.push(`SID: ${element.sid} for Phone Number ${element.phoneNumber} has unique Voice and Voice Fallback URLs\n\n`)
+      }
     });
-    process.stdout.write(chalk.bold(`URL Tests Passed\n\n`));
-    testResults.forEach((member) => {
-      process.stdout.write(`${ member }\n`);
-    })
+    if (testResults.length > 0) {
+      process.stdout.write(chalk.bold(`URL Tests Passed\n\n`));
+      testResults.forEach((member) => {
+        process.stdout.write(`${member}\n`);
+      })
+    };
     //process.stdout.write(JSON.stringify(testResults, null, 2));
     process.stdout.write(`\n\n`);
   }
