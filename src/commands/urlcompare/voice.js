@@ -41,7 +41,7 @@ class VoiceUrlTest extends TwilioClientCommand {
           `\n\nSID: ${element.sid} for Phone Number ${element.phoneNumber} has the same URL configured for Voice and Voice Fallback\n\n`
         );
         process.stdout.write(
-          `VoiceURL: ${element.voiceUrl}\nVoiceFallbackURL: ${element.voiceFallbackUrl}\n\n`
+          `Voice URL: ${element.voiceUrl}\nVoice FallbackURL: ${element.voiceFallbackUrl}\n\n`
         );
 
       }

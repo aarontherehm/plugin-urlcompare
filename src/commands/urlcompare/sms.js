@@ -43,7 +43,7 @@ class SmsUrlTest extends TwilioClientCommand {
           `\n\nSID: ${element.sid} for Phone Number ${element.phoneNumber} has the same URL configured for SMS and SMS Fallback\n\n`
         );
         process.stdout.write(
-          `VoiceURL: ${element.smsUrl}\nVoiceFallbackURL: ${element.smsFallbackUrl}\n\n`
+          `SMS URL: ${element.smsUrl}\nSMS FallbackURL: ${element.smsFallbackUrl}\n\n`
         );
           
       }
